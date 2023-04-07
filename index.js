@@ -22,12 +22,8 @@ class Sprite{
     }
     update(){
         this.draw();
-        
+
         this.position.y += this.velocity.y;
-        //this.position.x += this.velocity.x;
-        if((this.position.y + this.height) >= canvas.height || 
-                this.position.y == 0)
-            this.velocity.y = 0;   
     }
 }
 //////////////////////////////////////////////////////
@@ -47,7 +43,7 @@ const player = new Sprite({
 const enemy = new Sprite({
     position: {
         x: 400,
-        y: 0
+        y: 40
     }, 
     velocity: {
         x: 0,
@@ -57,10 +53,10 @@ const enemy = new Sprite({
 });
 // Object holding all the keys used by the player to manipulate in @animate() function
 const keys = {
-    a: {
+    w: {
         pressed: false
     },
-    d: {
+    s: {
         pressed: false
     }
 }
@@ -78,11 +74,14 @@ function animate(){
     player.update();
     enemy.update();
 
-    if(keys.a.pressed && lastKey === 'w'){
-        player.velocity.y = -4;
+    if(keys.w.pressed && lastKey === 'w'){
+        player.position.y < 0 ? 
+            player.velocity.y = 0 : player.velocity.y = -4;
+        
     } 
-    else if(keys.d.pressed && lastKey === 's'){
-        player.velocity.y = 4;
+    else if(keys.s.pressed && lastKey === 's'){
+        (player.position.y + player.height) >= canvas.height ?
+            player.velocity.y = 0 : player.velocity.y = 4;
     }
     else player.velocity.y = 0;
 }
@@ -95,11 +94,11 @@ animate();
 window.addEventListener('keydown', (event)=>{
     switch(event.key){
         case 'w':
-            keys.a.pressed = true;
+            keys.w.pressed = true;
             lastKey = 'w';
             break;
         case 's':
-            keys.d.pressed = true;
+            keys.s.pressed = true;
             lastKey = 's';
             break;
     }
@@ -108,10 +107,10 @@ window.addEventListener('keydown', (event)=>{
 window.addEventListener('keyup', (event)=>{
     switch(event.key){
         case 'w':
-            keys.a.pressed = false;
+            keys.w.pressed = false;
             break;
         case 's':
-            keys.d.pressed = false;
+            keys.s.pressed = false;
             break;
     }
 });
