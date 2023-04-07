@@ -1,6 +1,5 @@
 // TODO: Detect if user is on mobile or computer
 //    If mobile = 480x320; browser = 1024x576
-
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
 
@@ -10,12 +9,11 @@ canvas.height = 576;
 c.fillRect(0, 0, canvas.width, canvas.height);
 
 // TODO: OOP
-const gravity = 0.2;
 class Sprite{
-    constructor({position, velocity}) {
+    constructor({position, velocity, height}) {
         this.position = position;
         this.velocity = velocity;
-        this.height = 150;
+        this.height = height;
     }
 
     draw(){
@@ -24,26 +22,26 @@ class Sprite{
     }
     update(){
         this.draw();
-        //this.velocity.y += gravity;
+        
         this.position.y += this.velocity.y;
-        this.position.x += this.velocity.x;
-
-        if((this.position.y + this.height) >= canvas.height)
-            this.velocity.y = 0;
-        else this.velocity.y += gravity;
+        //this.position.x += this.velocity.x;
+        if((this.position.y + this.height) >= canvas.height || 
+                this.position.y == 0)
+            this.velocity.y = 0;   
     }
 }
 //////////////////////////////////////////////////////
 
 const player = new Sprite({
     position: {
-        x: 0,
-        y: 0
+        x: 150,
+        y: 150
     }, 
     velocity: {
         x: 0,
         y: 0
-    }
+    },
+    height: 120
 });
 
 const enemy = new Sprite({
@@ -54,7 +52,8 @@ const enemy = new Sprite({
     velocity: {
         x: 0,
         y: 0
-    }
+    },
+    height: 75
 });
 // Object holding all the keys used by the player to manipulate in @animate() function
 const keys = {
@@ -79,13 +78,13 @@ function animate(){
     player.update();
     enemy.update();
 
-    if(keys.a.pressed && lastKey === 'a'){
-        player.velocity.x = -1;
+    if(keys.a.pressed && lastKey === 'w'){
+        player.velocity.y = -4;
     } 
-    else if(keys.d.pressed && lastKey === 'd'){
-        player.velocity.x = 1;
+    else if(keys.d.pressed && lastKey === 's'){
+        player.velocity.y = 4;
     }
-    else player.velocity.x = 0;
+    else player.velocity.y = 0;
 }
 ///////////////////////////////////////////////////
 animate();
@@ -95,25 +94,32 @@ animate();
 // TODO: OOP
 window.addEventListener('keydown', (event)=>{
     switch(event.key){
-        case 'a':
+        case 'w':
             keys.a.pressed = true;
-            lastKey = 'a';
+            lastKey = 'w';
             break;
-        case 'd':
+        case 's':
             keys.d.pressed = true;
-            lastKey = 'd';
+            lastKey = 's';
             break;
     }
 });
 // Event listener for when key is released
 window.addEventListener('keyup', (event)=>{
     switch(event.key){
-        case 'a':
+        case 'w':
             keys.a.pressed = false;
             break;
-        case 'd':
+        case 's':
             keys.d.pressed = false;
             break;
     }
 });
-//////////////////////////////////////////////
+/////////////////////////////////////////////////
+
+// TODO: OOP
+function enemySpawner(){
+
+}
+
+/////////////////////////////////////////////////

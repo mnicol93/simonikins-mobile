@@ -1,5 +1,3 @@
-const gravity = 0.2;
-
 class Sprite{
     constructor({position, velocity}) {
         this.position = position;
@@ -15,9 +13,9 @@ class Sprite{
         this.position.y += this.velocity.y;
         this.position.x += this.velocity.x;
 
-        if((this.position.y + this.height) >= canvas.height)
+        if((this.position.y + this.height) >= canvas.height ||
+                this.position.y == 0)
             this.velocity.y = 0;
-        else this.velocity.y += gravity;
     }
 }
 
