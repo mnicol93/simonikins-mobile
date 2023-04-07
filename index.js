@@ -2,6 +2,10 @@
 //    If mobile = 480x320; browser = 1024x576
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
+const enemyHeight = 75;
+// Periodicity for enemies to spawn
+let spawn = 5000;
+let enemyCounter = 1;
 
 canvas.width = 1024;
 canvas.height = 576;
@@ -22,8 +26,8 @@ class Sprite{
     }
     update(){
         this.draw();
-
         this.position.y += this.velocity.y;
+        this.position.x -= this.velocity.x;
     }
 }
 //////////////////////////////////////////////////////
@@ -40,17 +44,17 @@ const player = new Sprite({
     height: 120
 });
 
-const enemy = new Sprite({
+const enemy = [new Sprite({
     position: {
         x: 400,
         y: 40
     }, 
     velocity: {
-        x: 0,
+        x: 1,
         y: 0
     },
-    height: 75
-});
+    height: enemyHeight
+})];
 // Object holding all the keys used by the player to manipulate in @animate() function
 const keys = {
     w: {
@@ -72,12 +76,13 @@ function animate(){
     c.fillRect(0,0, canvas.width, canvas.height);
     // Draw the players on screen
     player.update();
-    enemy.update();
+    enemy.forEach(enem => {
+        enem.update(); 
+    });  
 
     if(keys.w.pressed && lastKey === 'w'){
         player.position.y < 0 ? 
             player.velocity.y = 0 : player.velocity.y = -4;
-        
     } 
     else if(keys.s.pressed && lastKey === 's'){
         (player.position.y + player.height) >= canvas.height ?
@@ -118,7 +123,20 @@ window.addEventListener('keyup', (event)=>{
 
 // TODO: OOP
 function enemySpawner(){
-
-}
-
+    setInterval(()=>{
+        enemy[enemyCounter++] = new Sprite({
+            position:{
+                x: 600,
+                y: (Math.random() * canvas.height) - enemyHeight
+            },
+            velocity: {
+                x: 1,
+                y: 0
+            },
+            height: 75
+        });
+    }, 1500);
+    
+    }
+enemySpawner();
 /////////////////////////////////////////////////
