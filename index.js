@@ -4,7 +4,7 @@ const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
 const enemyHeight = 75;
 // Periodicity for enemies to spawn
-let spawn = 5000;
+let spawn = 3500;
 let enemyCounter = 1;
 
 canvas.width = 1024;
@@ -77,9 +77,25 @@ function animate(){
     // Draw the players on screen
     player.update();
     enemy.forEach(enem => {
-        enem.update(); 
+        enem.update();
+    //Detect collision
+    if(enem.position.x < 200 && enem.position.x > 98){
+            // TODO: Utils OOP
+            if(
+                player.position.y == enem.position.y + enem.height ||
+                (player.position.y >= enem.position.y && 
+                 player.position.y <= (enem.position.y + enem.height)) ||
+                (player.position.y <= enem.position.y &&
+                 (player.position.y + player.height) >= (enem.position.y + enem.height)) ||
+                player.position.y + player.height == enem.position.y ||
+                (player.position.y + player.height >= enem.position.y && 
+                 (player.position.y + player.height) <= (enem.position.y + enem.height))
+            ){
+                console.log('COLISION');
+            }
+            //////////////////////////////////////////////////
+        }
     });  
-
     if(keys.w.pressed && lastKey === 'w'){
         player.position.y < 0 ? 
             player.velocity.y = 0 : player.velocity.y = -4;
@@ -89,6 +105,7 @@ function animate(){
             player.velocity.y = 0 : player.velocity.y = 4;
     }
     else player.velocity.y = 0;
+
 }
 ///////////////////////////////////////////////////
 animate();
@@ -135,8 +152,8 @@ function enemySpawner(){
             },
             height: 75
         });
-    }, 1500);
-    
+    }, spawn);
+    if (spawn > 1500) spawn -= 50;
     }
 enemySpawner();
 /////////////////////////////////////////////////
