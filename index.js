@@ -6,33 +6,14 @@ const enemyHeight = 75;
 // Periodicity for enemies to spawn
 let spawn = 3500;
 let enemyCounter = 1;
+let collisionFound = false;
 
 canvas.width = 1024;
 canvas.height = 576;
 
 c.fillRect(0, 0, canvas.width, canvas.height);
 
-// TODO: OOP
-class Sprite{
-    constructor({position, velocity, height}) {
-        this.position = position;
-        this.velocity = velocity;
-        this.height = height;
-    }
-
-    draw(){
-        c.fillStyle = 'red';
-        c.fillRect(this.position.x, this.position.y, 50, this.height);
-    }
-    update(){
-        this.draw();
-        this.position.y += this.velocity.y;
-        this.position.x -= this.velocity.x;
-    }
-}
-//////////////////////////////////////////////////////
-
-const player = new Sprite({
+const player = new Player({
     position: {
         x: 150,
         y: 150
@@ -41,10 +22,11 @@ const player = new Sprite({
         x: 0,
         y: 0
     },
-    height: 120
+    height: 120,
+    width: 50
 });
 
-const enemy = [new Sprite({
+const enemy = [new Player({
     position: {
         x: 400,
         y: 40
@@ -53,7 +35,8 @@ const enemy = [new Sprite({
         x: 1,
         y: 0
     },
-    height: enemyHeight
+    height: enemyHeight,
+    width: 50
 })];
 // Object holding all the keys used by the player to manipulate in @animate() function
 const keys = {
@@ -67,7 +50,7 @@ const keys = {
 // Holds the value of the last key pressed by user to control movement
 let lastKey;
 
-// TODO: OOP
+// TODO: OOP Utils
 function animate(){
     // This function will repeat in loop thanks to this line
     window.requestAnimationFrame(animate);
@@ -92,11 +75,13 @@ function animate(){
                  (player.position.y + player.height) <= (enem.position.y + enem.height))
             ){
                 console.log('COLISION');
+                gameOver();
             }
             //////////////////////////////////////////////////
         }
     });  
-    if(keys.w.pressed && lastKey === 'w'){
+    if(collisionFound) player.velocity.y = 0;
+    else if(keys.w.pressed && lastKey === 'w'){
         player.position.y < 0 ? 
             player.velocity.y = 0 : player.velocity.y = -4;
     } 
@@ -113,6 +98,7 @@ animate();
 // Add event listener for moving
 // TODO: Change by touch for mobile
 // TODO: OOP
+
 window.addEventListener('keydown', (event)=>{
     switch(event.key){
         case 'w':
@@ -141,19 +127,42 @@ window.addEventListener('keyup', (event)=>{
 // TODO: OOP
 function enemySpawner(){
     setInterval(()=>{
-        enemy[enemyCounter++] = new Sprite({
-            position:{
-                x: 600,
-                y: (Math.random() * canvas.height) - enemyHeight
-            },
-            velocity: {
-                x: 1,
-                y: 0
-            },
-            height: 75
-        });
-    }, spawn);
+        let enemyY = (Math.random() * canvas.height) - enemyHeight;
+        if(enemyY < 0) enemyY = 0;
+        
+        if(!collisionFound){
+            enemy[enemyCounter++] = new Player({
+                position:{
+                    x: 600,
+                    y: enemyY
+                },
+                velocity: {
+                    x: 1,
+                    y: 0
+                },
+                height: 75,
+                width: 50
+            });
+    }}, spawn);
     if (spawn > 1500) spawn -= 50;
     }
-enemySpawner();
 /////////////////////////////////////////////////
+enemySpawner();
+
+// TODO: UTILS
+function gameOver(){
+    collisionFound = true;
+    player.velocity.y = 0;
+    enemy.forEach(e => {
+        e.velocity.x = 0;
+    });
+
+    let goDiv = document.getElementById('game-over');
+
+    goDiv.style.height = canvas.height;
+    goDiv.style.width = canvas.width;
+
+    goDiv.innerText = 'Te has muerto XD';
+    goDiv.style.color = 'white';
+}
+//////////////////////////////////////////////
