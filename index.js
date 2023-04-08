@@ -3,6 +3,12 @@
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
 const enemyHeight = 75;
+
+let city = new Image();
+city.src = 'CIUDAD2.png';
+let cityLength = 0;
+let scrollSpeed = -1.2;
+
 // Periodicity for enemies to spawn
 let spawn = 3500;
 let enemyCounter = 1;
@@ -11,7 +17,27 @@ let collisionFound = false;
 canvas.width = 1024;
 canvas.height = 576;
 
-c.fillRect(0, 0, canvas.width, canvas.height);
+//c.fillRect(0, 0, canvas.width, canvas.height);
+// Start Classes declaration
+const backGround = new Sprite({
+    position: {
+        x: -370,
+        y: 0
+    },
+    height: canvas.height,
+    width: canvas.width,
+    imageSrc: 'cielako.png'
+});
+// // Used to make an infinite loop effect
+// const backGround2 = new Sprite({
+//     position: {
+//         x: 0,
+//         y: 75
+//     },
+//     height: canvas.height,
+//     width: canvas.width,
+//     imageSrc: 'CIUDAD.png'
+// });
 
 const player = new Player({
     position: {
@@ -38,6 +64,8 @@ const enemy = [new Player({
     height: enemyHeight,
     width: 50
 })];
+// End Classes Declaration
+
 // Object holding all the keys used by the player to manipulate in @animate() function
 const keys = {
     w: {
@@ -57,12 +85,18 @@ function animate(){
     // Clear canvas prior to drawing new position
     c.fillStyle = 'black'
     c.fillRect(0,0, canvas.width, canvas.height);
+
+    // Draw the sky background
+    backGround.update();
+
+    scrollCity();
+    
     // Draw the players on screen
     player.update();
     enemy.forEach(enem => {
         enem.update();
-    //Detect collision
-    if(enem.position.x < 200 && enem.position.x > 98){
+        //Detect collision
+        if(enem.position.x < 200 && enem.position.x > 98){
             // TODO: Utils OOP
             if(
                 player.position.y == enem.position.y + enem.height ||
@@ -93,6 +127,22 @@ function animate(){
 
 }
 ///////////////////////////////////////////////////
+// TODO: OOP Utils
+function scrollCity(){
+    // Draw the city moving
+    c.drawImage(city,cityLength, 203);
+    // Second image for infinite background effect
+    c.drawImage(city, cityLength + canvas.width , 203);
+    
+    cityLength += scrollSpeed;
+    if(cityLength <= -canvas.width){
+        console.log(cityLength);
+        console.log(canvas.width);
+        cityLength = 0;
+    }
+}
+//////////////////////////////////////////////////
+
 animate();
 
 // Add event listener for moving
@@ -153,6 +203,7 @@ enemySpawner();
 function gameOver(){
     collisionFound = true;
     player.velocity.y = 0;
+    scrollSpeed = 0;
     enemy.forEach(e => {
         e.velocity.x = 0;
     });
