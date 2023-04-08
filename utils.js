@@ -1,0 +1,102 @@
+// Handles main animation
+function animate(){
+    // This function will repeat in loop thanks to this line
+    window.requestAnimationFrame(animate);
+    // Clear canvas prior to drawing new position
+    c.fillStyle = 'black'
+    c.fillRect(0,0, canvas.width, canvas.height);
+
+    // Draw the sky background
+    backGround.update();
+
+    scrollCity();
+    
+    // Draw the players on screen
+    player.update();
+    enemy.forEach(enem => {
+        enem.update();
+        //Detect collision
+        if(enem.position.x < 200 && enem.position.x > 98){
+            // TODO: Utils OOP
+            if(
+                player.position.y == enem.position.y + enem.height ||
+                (player.position.y >= enem.position.y && 
+                 player.position.y <= (enem.position.y + enem.height)) ||
+                (player.position.y <= enem.position.y &&
+                 (player.position.y + player.height) >= (enem.position.y + enem.height)) ||
+                player.position.y + player.height == enem.position.y ||
+                (player.position.y + player.height >= enem.position.y && 
+                 (player.position.y + player.height) <= (enem.position.y + enem.height))
+            ){
+                console.log('COLISION');
+                gameOver();
+            }
+            //////////////////////////////////////////////////
+        }
+    });  
+    if(collisionFound) player.velocity.y = 0;
+    else if(keys.w.pressed && lastKey === 'w'){
+        player.position.y < 0 ? 
+            player.velocity.y = 0 : player.velocity.y = -4;
+    } 
+    else if(keys.s.pressed && lastKey === 's'){
+        (player.position.y + player.height) >= canvas.height ?
+            player.velocity.y = 0 : player.velocity.y = 4;
+    }
+    else player.velocity.y = 0;
+
+}
+
+// Will spawn enemies as specified by variable spawn
+function enemySpawner(){
+    setInterval(()=>{
+        let enemyY = (Math.random() * canvas.height) - enemyHeight;
+        if(enemyY < 0) enemyY = 0;
+        
+        if(!collisionFound){
+            enemy[enemyCounter++] = new Player({
+                position:{
+                    x: 600,
+                    y: enemyY
+                },
+                velocity: {
+                    x: 1,
+                    y: 0
+                },
+                height: 75,
+                width: 50
+            });
+    }}, spawn);
+    if (spawn > 1500) spawn -= 50;
+    }
+// Handles game over screen
+function gameOver(){
+    collisionFound = true;
+    player.velocity.y = 0;
+    scrollSpeed = 0;
+    enemy.forEach(e => {
+        e.velocity.x = 0;
+    });
+
+    let goDiv = document.getElementById('game-over');
+
+    goDiv.style.height = canvas.height;
+    goDiv.style.width = canvas.width;
+
+    goDiv.innerText = 'Te has muerto tio XD';
+    goDiv.style.color = 'white';
+}
+// Infinite background scrolling
+function scrollCity(){
+    // Draw the city moving
+    c.drawImage(city,cityLength, 203);
+    // Second image for infinite background effect
+    c.drawImage(city, cityLength + canvas.width , 203);
+    
+    cityLength += scrollSpeed;
+    if(cityLength <= -canvas.width){
+        console.log(cityLength);
+        console.log(canvas.width);
+        cityLength = 0;
+    }
+}
