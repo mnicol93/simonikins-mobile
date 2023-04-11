@@ -1,13 +1,13 @@
-class Player{
-    constructor({position, velocity, height, width}) {
-        this.position = position;
+class Player extends Sprite{
+    constructor({position, velocity, height, width, imageSrc}) {
+        super({ position, imageSrc })
+        //this.position = position;
         this.velocity = velocity;
         this.height = height;
         this.width = width
-    }
-    draw(){
-        c.fillStyle = 'red';
-        c.fillRect(this.position.x, this.position.y, this.width, this.height);
+        // Creates an HTML image but within a JS property
+        this.image = new Image();
+        this.image.src = imageSrc;
     }
     update(){
         this.draw();

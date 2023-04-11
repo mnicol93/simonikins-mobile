@@ -4,11 +4,11 @@ class Sprite{
         this.height = height;
         this.width = width;
         // Creates an HTML image but within a JS property
-        this.bgImage = new Image();
-        this.bgImage.src = imageSrc;
+        this.image = new Image();
+        this.image.src = imageSrc;
     }
     draw(){
-        c.drawImage(this.bgImage, this.position.x, this.position.y);
+        c.drawImage(this.image, this.position.x, this.position.y);
     }
     update(){
         this.draw();

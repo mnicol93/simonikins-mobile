@@ -28,7 +28,6 @@ function animate(){
                 (player.position.y + player.height >= enem.position.y && 
                  (player.position.y + player.height) <= (enem.position.y + enem.height))
             ){
-                console.log('COLISION');
                 gameOver();
             }
             //////////////////////////////////////////////////
@@ -64,7 +63,8 @@ function enemySpawner(){
                     y: 0
                 },
                 height: 75,
-                width: 50
+                width: 50,
+                imageSrc: 'rata12.png'
             });
     }}, spawn);
     if (spawn > 1500) spawn -= 50;

@@ -22,14 +22,13 @@ canvas.height = 576;
 // Start Classes declaration
 const backGround = new Sprite({
     position: {
-        x: -370,
+        x: -350,
         y: 0
     },
     height: canvas.height,
     width: canvas.width,
     imageSrc: 'cielako.png'
 });
-
 const player = new Player({
     position: {
         x: 150,
@@ -39,8 +38,9 @@ const player = new Player({
         x: 0,
         y: 0
     },
-    height: 120,
-    width: 50
+    height: 160,
+    width: 50,
+    imageSrc: 'rapero1.png'
 });
 
 const enemy = [new Player({
@@ -53,7 +53,8 @@ const enemy = [new Player({
         y: 0
     },
     height: enemyHeight,
-    width: 50
+    width: 50,
+    imageSrc: 'rata12.png'
 })];
 // End Classes Declaration
 
@@ -66,7 +67,6 @@ const keys = {
         pressed: false
     }
 }
-
 animate();
 // TODO: Change by touch for mobile
 enemySpawner();
