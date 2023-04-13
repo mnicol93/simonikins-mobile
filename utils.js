@@ -1,7 +1,8 @@
+var animation;
 // Handles main animation
 function animate(){
     // This function will repeat in loop thanks to this line
-    window.requestAnimationFrame(animate);
+    animation = window.requestAnimationFrame(animate);
     // Clear canvas prior to drawing new position
     c.fillStyle = 'black'
     c.fillRect(0,0, canvas.width, canvas.height);
@@ -16,7 +17,7 @@ function animate(){
     enemy.forEach(enem => {
         enem.update();
         //Detect collision
-        if(enem.position.x < 200 && enem.position.x > 98){
+        if(enem.position.x < 200 && enem.position.x > 125){
             // TODO: Utils OOP
             if(
                 player.position.y == enem.position.y + enem.height ||
@@ -28,6 +29,7 @@ function animate(){
                 (player.position.y + player.height >= enem.position.y && 
                  (player.position.y + player.height) <= (enem.position.y + enem.height))
             ){
+                console.log(enem.position.x);
                 gameOver();
             }
             //////////////////////////////////////////////////
@@ -45,11 +47,10 @@ function animate(){
     else player.velocity.y = 0;
 
 }
-
 // Will spawn enemies as specified by variable spawn
 function enemySpawner(){
     setInterval(()=>{
-        let enemyY = (Math.random() * canvas.height) - enemyHeight;
+        var enemyY = (Math.random() * canvas.height) - enemyHeight;
         if(enemyY < 0) enemyY = 0;
         
         if(!collisionFound){
@@ -71,6 +72,7 @@ function enemySpawner(){
     }
 // Handles game over screen
 function gameOver(){
+    window.cancelAnimationFrame(animation);
     collisionFound = true;
     player.velocity.y = 0;
     scrollSpeed = 0;
@@ -78,13 +80,18 @@ function gameOver(){
         e.velocity.x = 0;
     });
 
-    let goDiv = document.getElementById('game-over');
-
-    goDiv.style.height = canvas.height;
-    goDiv.style.width = canvas.width;
+    var containerDiv = document.getElementById('container');
+    containerDiv.insertAdjacentHTML(
+        'afterbegin',
+        '<div id="game-over"></div>');
+    
+    var goDiv = document.getElementById('game-over');
+    //goDiv.style.height = canvas.height;
+    //goDiv.style.width = canvas.width;
 
     goDiv.innerText = 'Te has muerto tio XD';
     goDiv.style.color = 'white';
+
 }
 // Infinite background scrolling
 function scrollCity(){

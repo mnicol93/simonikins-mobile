@@ -3,17 +3,18 @@
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
 const enemyHeight = 75;
+const theme = new Audio("tema.wav");
 // Image holding the city
-let city = new Image();
+var city = new Image();
 city.src = 'CIUDAD2.png';
-let cityLength = 0;
-let scrollSpeed = -0.9;
+var cityLength = 0;
+var scrollSpeed = -0.9;
 // Holds the value of the last key pressed by user to control movement
-let lastKey;
+var lastKey;
 // Periodicity for enemies to spawn
-let spawn = 3500;
-let enemyCounter = 1;
-let collisionFound = false;
+var spawn = 3500;
+var enemyCounter = 1;
+var collisionFound = false;
 
 canvas.width = 1024;
 canvas.height = 576;
@@ -53,7 +54,7 @@ const enemy = [new Player({
         y: 0
     },
     height: enemyHeight,
-    width: 50,
+    width: 30,
     imageSrc: 'rata12.png'
 })];
 // End Classes Declaration
@@ -67,6 +68,12 @@ const keys = {
         pressed: false
     }
 }
-animate();
+// Create initial screen, when press play call animate
+document.querySelector('button').addEventListener('click', function() {
+    theme.loop = true;
+    theme.play();
+    animate();
+  });
+
 // TODO: Change by touch for mobile
 enemySpawner();
