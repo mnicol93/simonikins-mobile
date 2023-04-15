@@ -21,4 +21,6 @@ window.addEventListener('keyup', (event)=>{
             break;
     }
 });
-
+// Delete initial screen button
+var button = document.getElementById('button');
+button.onclick = () => { button.remove(); }
