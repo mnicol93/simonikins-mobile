@@ -4,6 +4,7 @@ const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
 const enemyHeight = 75;
 const theme = new Audio("tema.wav");
+const deathSound = new Audio("muerte.wav");
 // Image holding the city
 var city = new Image();
 city.src = 'CIUDAD2.png';
@@ -45,10 +46,10 @@ const player = new Player({
     width: 50,
     imageSrc: 'rapero1.png'
 });
-
+// TODO: position.x = canvas.width,
 const enemy = [new Player({
     position: {
-        x: canvas.width,
+        x: 350,
         y: 40
     }, 
     velocity: {

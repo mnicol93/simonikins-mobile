@@ -29,8 +29,12 @@ function animate(){
                 (player.position.y + player.height >= enem.position.y && 
                  (player.position.y + player.height) <= (enem.position.y + enem.height))
             ){
-                console.log(enem.position.x);
+                player.image.src = 'enfermo1.png';
+                player.update();
                 gameOver();
+                // setTimeout(() => {
+                //     gameOver();
+                // }, 17);
             }
             //////////////////////////////////////////////////
         }
@@ -67,7 +71,7 @@ function enemySpawner(){
                 width: 50,
                 imageSrc: 'rata12.png'
             });
-        if (spawn > 1500) spawn -= 50;
+        if (spawn > 1000) spawn -= 50;
         console.log(spawn);
     }}, spawn);
     
@@ -75,6 +79,8 @@ function enemySpawner(){
 // Handles game over screen
 function gameOver(){
     window.cancelAnimationFrame(animation);
+    theme.pause();
+    deathSound.play();
     collisionFound = true;
     player.velocity.y = 0;
     scrollSpeed = 0;
