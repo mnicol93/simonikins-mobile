@@ -22,5 +22,10 @@ window.addEventListener('keyup', (event)=>{
     }
 });
 // Delete initial screen button
-var button = document.getElementById('button');
-button.onclick = () => { button.remove(); }
+document.getElementById('button').onclick = () => {
+    theme.loop = true;
+    theme.play();
+    animate(); 
+    button.remove();
+    isReady = true;
+};

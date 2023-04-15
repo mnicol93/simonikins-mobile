@@ -52,11 +52,11 @@ function enemySpawner(){
     setInterval(()=>{
         var enemyY = (Math.random() * canvas.height) - enemyHeight;
         if(enemyY < 0) enemyY = 0;
-        
-        if(!collisionFound){
+        // TODO: Change position.x value by variable to adapt for mobile
+        if(!collisionFound && isReady){
             enemy[enemyCounter++] = new Player({
                 position:{
-                    x: 600,
+                    x: canvas.width,
                     y: enemyY
                 },
                 velocity: {
@@ -67,8 +67,10 @@ function enemySpawner(){
                 width: 50,
                 imageSrc: 'rata12.png'
             });
+        if (spawn > 1500) spawn -= 50;
+        console.log(spawn);
     }}, spawn);
-    if (spawn > 1500) spawn -= 50;
+    
     }
 // Handles game over screen
 function gameOver(){

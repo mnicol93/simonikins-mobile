@@ -12,10 +12,12 @@ var scrollSpeed = -0.9;
 // Holds the value of the last key pressed by user to control movement
 var lastKey;
 // Periodicity for enemies to spawn
-var spawn = 3500;
+var spawn = 2500;
 var enemyCounter = 1;
 var collisionFound = false;
-
+// False until initial button is pressed
+var isReady = false;
+// TODO: Change for mobile
 canvas.width = 1024;
 canvas.height = 576;
 
@@ -46,7 +48,7 @@ const player = new Player({
 
 const enemy = [new Player({
     position: {
-        x: 400,
+        x: canvas.width,
         y: 40
     }, 
     velocity: {
@@ -69,11 +71,12 @@ const keys = {
     }
 }
 // Create initial screen, when press play call animate
-document.querySelector('button').addEventListener('click', function() {
-    theme.loop = true;
-    theme.play();
-    animate();
-  });
+// document.querySelector('button').addEventListener('click', function() {
+//     theme.loop = true;
+//     theme.play();
+//     animate();
+//     isReady = true;
+//   });
 
 // TODO: Change by touch for mobile
 enemySpawner();
