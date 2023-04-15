@@ -1,8 +1,12 @@
 var animation;
+var death = false;
+var enemySpeed = 1;
 // Handles main animation
 function animate(){
     // This function will repeat in loop thanks to this line
     animation = window.requestAnimationFrame(animate);
+    // Must check right after request animation so it can cancel if gameover
+    if(death) gameOver();
     // Clear canvas prior to drawing new position
     c.fillStyle = 'black'
     c.fillRect(0,0, canvas.width, canvas.height);
@@ -29,12 +33,9 @@ function animate(){
                 (player.position.y + player.height >= enem.position.y && 
                  (player.position.y + player.height) <= (enem.position.y + enem.height))
             ){
+                console.log(player.position.y+ ' - ' + player.height + ' : ' + enem.position.y + ' - ' + enem.height)
                 player.image.src = 'enfermo1.png';
-                player.update();
-                gameOver();
-                // setTimeout(() => {
-                //     gameOver();
-                // }, 17);
+                death = true;
             }
             //////////////////////////////////////////////////
         }
@@ -45,7 +46,7 @@ function animate(){
             player.velocity.y = 0 : player.velocity.y = -4;
     } 
     else if(keys.s.pressed && lastKey === 's'){
-        (player.position.y + player.height) >= canvas.height ?
+        (player.position.y + player.height + 30) >= canvas.height ?
             player.velocity.y = 0 : player.velocity.y = 4;
     }
     else player.velocity.y = 0;
@@ -64,15 +65,15 @@ function enemySpawner(){
                     y: enemyY
                 },
                 velocity: {
-                    x: 1,
+                    x: enemySpeed,
                     y: 0
                 },
-                height: 75,
+                height: enemyHeight,
                 width: 50,
                 imageSrc: 'rata12.png'
             });
-        if (spawn > 1000) spawn -= 50;
-        console.log(spawn);
+        if (spawn > 500) spawn -= 50;
+        //if(enemySpeed < 2) enemySpeed += 0.1;
     }}, spawn);
     
     }
@@ -110,8 +111,6 @@ function scrollCity(){
     
     cityLength += scrollSpeed;
     if(cityLength <= -canvas.width){
-        console.log(cityLength);
-        console.log(canvas.width);
         cityLength = 0;
     }
 }
