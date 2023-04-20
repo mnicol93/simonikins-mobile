@@ -94,18 +94,26 @@ function gameOver(){
     var containerDiv = document.getElementById('container');
     containerDiv.insertAdjacentHTML(
         'afterbegin',
-        '<div id="game-over"></div>');
+        '<div id="game-over"><button id="game-over-btn">HOLAHOLACARACOLA</button></div>');
     
     var goDiv = document.getElementById('game-over');
+    var gameOverBtn = document.getElementById('game-over-btn');
+    
     var img = new Image(canvas.width/1.95, canvas.height/1.10);
     img.src = 'Portada.jpg';
     img.style.position = 'absolute';
-    img.style.left = canvas.width/3.2 + 'px';
-    //goDiv.style.height = canvas.height;
-    //goDiv.style.width = canvas.width;
+    img.style.left = (canvas.width/3.2) + 'px';
+    img.style.zIndex = 1;
+    goDiv.style.height = canvas.height + 'px';
+    goDiv.style.width = canvas.width + 'px';
 
     //goDiv.innerText = 'Te has muerto tio XD';
     goDiv.appendChild(img);
+    gameOverBtn.style.zIndex = 2;
+    gameOverBtn.style.width = (img.width/1.60) + 'px';
+    gameOverBtn.style.height = (img.height/1.2)+ 'px';
+    gameOverBtn.style.left = (canvas.width / 2.38) + 'px';
+    gameOverBtn.style.position = 'absolute';
     //goDiv.style.color = 'white';
 
 }
