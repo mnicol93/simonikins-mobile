@@ -95,7 +95,7 @@ function gameOver(){
     var containerDiv = document.getElementById('container');
     containerDiv.insertAdjacentHTML(
         'afterbegin',
-        '<div id="game-over"><button id="game-over-btn">HOLAHOLACARACOLA</button></div>');
+        '<div id="game-over"><button id="game-over-btn"></button></div>');
     
     var goDiv = document.getElementById('game-over');
     var gameOverBtn = document.getElementById('game-over-btn');
@@ -107,8 +107,7 @@ function gameOver(){
     img.style.zIndex = 1;
     goDiv.style.height = canvas.height + 'px';
     goDiv.style.width = canvas.width + 'px';
-
-    //goDiv.innerText = 'Te has muerto tio XD';
+    
     goDiv.appendChild(img);
     gameOverBtn.style.zIndex = 2;
     gameOverBtn.style.width = (img.width/1.60) + 'px';
