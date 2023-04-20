@@ -1,3 +1,4 @@
+var touchPosition = -1;
 window.addEventListener('keydown', (event)=>{
     switch(event.key){
         case 'w':
@@ -21,6 +22,12 @@ window.addEventListener('keyup', (event)=>{
             break;
     }
 });
+window.addEventListener('touchstart', (event)=>{
+    touchPosition = event.targetTouches[0].clientY;
+})
+window.addEventListener('touchend', (event) => {
+    touchPosition = -1;
+})
 // Delete initial screen button
 document.getElementById('button').onclick = () => {
     theme.loop = true;

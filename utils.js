@@ -39,13 +39,15 @@ function animate(){
             }
             //////////////////////////////////////////////////
         }
-    });  
+    }); 
+    // Move player
     if(collisionFound) player.velocity.y = 0;
-    else if(keys.w.pressed && lastKey === 'w'){
+
+    else if(keys.w.pressed && lastKey === 'w' || touchPosition < 250 && touchPosition > 0){
         player.position.y < 0 ? 
             player.velocity.y = 0 : player.velocity.y = -4;
     } 
-    else if(keys.s.pressed && lastKey === 's'){
+    else if(keys.s.pressed && lastKey === 's' || touchPosition > 250){
         (player.position.y + player.height + 30) >= canvas.height ?
             player.velocity.y = 0 : player.velocity.y = 4;
     }
@@ -95,11 +97,16 @@ function gameOver(){
         '<div id="game-over"></div>');
     
     var goDiv = document.getElementById('game-over');
+    var img = new Image(canvas.width/1.95, canvas.height/1.10);
+    img.src = 'Portada.jpg';
+    img.style.position = 'absolute';
+    img.style.left = canvas.width/3.2 + 'px';
     //goDiv.style.height = canvas.height;
     //goDiv.style.width = canvas.width;
 
-    goDiv.innerText = 'Te has muerto tio XD';
-    goDiv.style.color = 'white';
+    //goDiv.innerText = 'Te has muerto tio XD';
+    goDiv.appendChild(img);
+    //goDiv.style.color = 'white';
 
 }
 // Infinite background scrolling

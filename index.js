@@ -21,7 +21,6 @@ var isReady = false;
 // TODO: Change for mobile
 canvas.width = 1024;
 canvas.height = 576;
-
 //c.fillRect(0, 0, canvas.width, canvas.height);
 // Start Classes declaration
 const backGround = new Sprite({
