@@ -114,15 +114,15 @@ function gameOver(){
     gameOverBtn.style.height = (img.height/1.2)+ 'px';
     gameOverBtn.style.left = (canvas.width / 2.38) + 'px';
     gameOverBtn.style.position = 'absolute';
-    //goDiv.style.color = 'white';
-
+        
+    resetCanvas(goDiv);
 }
 // Infinite background scrolling
 function scrollCity(){
     // Draw the city moving
     c.drawImage(city,cityLength, 203);
     // Second image for infinite background effect
-    c.drawImage(city, cityLength + canvas.width , 203);
+    c.drawImage(city, cityLength + canvas.width -1, 203);
     
     cityLength += scrollSpeed;
     if(cityLength <= -canvas.width){
