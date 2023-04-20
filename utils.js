@@ -1,6 +1,6 @@
 var animation;
 var death = false;
-var enemySpeed = 1;
+var enemySpeed = 1.25;
 // Handles main animation
 function animate(){
     // This function will repeat in loop thanks to this line
@@ -57,6 +57,7 @@ function animate(){
 // Will spawn enemies as specified by variable spawn
 function enemySpawner(){
     setInterval(()=>{
+        console.log(spawn);
         var enemyY = (Math.random() * canvas.height) - enemyHeight;
         if(enemyY < 0) enemyY = 0;
         // TODO: Change position.x value by variable to adapt for mobile
@@ -74,7 +75,7 @@ function enemySpawner(){
                 width: 50,
                 imageSrc: 'rata12.png'
             });
-        if (spawn > 500) spawn -= 50;
+        if (spawn > 500) spawn -= 100;
         //if(enemySpeed < 2) enemySpeed += 0.1;
     }}, spawn);
     
