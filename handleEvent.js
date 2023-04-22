@@ -59,6 +59,7 @@ function resetCanvas(goDiv){
         theme.play();
         // Play again
         animate();
+        
     }
     
 }

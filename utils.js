@@ -99,7 +99,7 @@ function gameOver(){
     
     var goDiv = document.getElementById('game-over');
     var gameOverBtn = document.getElementById('game-over-btn');
-    
+
     var img = new Image(canvas.width/1.95, canvas.height/1.10);
     img.src = 'Portada.jpg';
     img.style.position = 'absolute';

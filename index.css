@@ -20,7 +20,8 @@
 }
 #game-over-btn{
     border: 4px solid #7f26b9;
-    background-color: transparent;
+    background-color: #7f26b9;
     color: #7f26b9;
     box-shadow: 0 6px 6px rgba(0, 0, 0, 0.6);
+    opacity: 0.2;
 }
