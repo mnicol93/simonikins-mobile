@@ -40,7 +40,7 @@ function resetCanvas(goDiv){
     document.getElementById('game-over-btn').onclick = () =>{
         resetHandler(goDiv);
     }
-    document.getElementById('game-over-btn').ontouchstart = () =>{
+    document.getElementById('game-over-btn').touchstart = () =>{
         resetHandler(goDiv);
     }
 }
