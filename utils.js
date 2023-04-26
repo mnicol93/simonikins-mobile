@@ -84,13 +84,15 @@ function gameOver(){
     player.update();
     window.cancelAnimationFrame(animation);
     theme.pause();
-    deathSound.play();
+    //deathSound.play();
     collisionFound = true;
     player.velocity.y = 0;
     scrollSpeed = 0;
     enemy.forEach(e => {
         e.velocity.x = 0;
     });
+
+    
 
     var containerDiv = document.getElementById('container');
     containerDiv.insertAdjacentHTML(
@@ -114,7 +116,7 @@ function gameOver(){
     gameOverBtn.style.height = (img.height/1.2)+ 'px';
     gameOverBtn.style.left = (canvas.width / 2.38) + 'px';
     gameOverBtn.style.position = 'absolute';
-        
+    deathSound.play();    
     resetCanvas(goDiv);
 }
 // Infinite background scrolling
