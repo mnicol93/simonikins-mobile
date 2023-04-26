@@ -33,7 +33,6 @@ function animate(){
                 (player.position.y + player.height >= enem.position.y && 
                  (player.position.y + player.height) <= (enem.position.y + enem.height))
             ){
-                console.log(player.position.y+ ' - ' + player.height + ' : ' + enem.position.y + ' - ' + enem.height)
                 player.image.src = 'enfermo1.png';
                 death = true;
             }
@@ -82,6 +81,7 @@ function enemySpawner(){
     }
 // Handles game over screen
 function gameOver(){
+    player.update();
     window.cancelAnimationFrame(animation);
     theme.pause();
     deathSound.play();
