@@ -35,6 +35,7 @@ function animate(){
             ){
                 player.image.src = 'enfermo1.png';
                 death = true;
+                player.update();
             }
             //////////////////////////////////////////////////
         }
@@ -81,7 +82,6 @@ function enemySpawner(){
     }
 // Handles game over screen
 function gameOver(){
-    player.update();
     window.cancelAnimationFrame(animation);
     theme.pause();
     //deathSound.play();
@@ -90,9 +90,7 @@ function gameOver(){
     scrollSpeed = 0;
     enemy.forEach(e => {
         e.velocity.x = 0;
-    });
-
-    
+    }); 
 
     var containerDiv = document.getElementById('container');
     containerDiv.insertAdjacentHTML(
