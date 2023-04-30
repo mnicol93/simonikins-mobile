@@ -57,7 +57,6 @@ function animate(){
 // Will spawn enemies as specified by variable spawn
 function enemySpawner(){
     setInterval(()=>{
-        console.log(spawn);
         var enemyY = (Math.random() * canvas.height) - enemyHeight;
         if(enemyY < 0) enemyY = 0;
         // TODO: Change position.x value by variable to adapt for mobile
@@ -114,7 +113,7 @@ function gameOver(){
     gameOverBtn.style.height = (img.height/1.2)+ 'px';
     gameOverBtn.style.left = (canvas.width / 2.38) + 'px';
     gameOverBtn.style.position = 'absolute';
-    deathSound.play();    
+    //deathSound.play();    
     resetCanvas(goDiv);
 }
 // Infinite background scrolling
@@ -132,7 +131,7 @@ function scrollCity(){
 
 function resetHandler(goDiv){
     // Reset canvas to draw clean
-    c.reset();
+    //c.reset();
     // Remove div holding game over
     goDiv.remove();
     // Return player to initial state

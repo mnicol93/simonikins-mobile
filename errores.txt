@@ -1,0 +1,8 @@
+- Simonako to enfermo no aparece.
+- Sonido de muerte no suena.
+- Jugar de nuevo despues de muerte no funciona.
+- A veces la cancion suena doble.
+V Al terminar la cancion no suena en bucle.
+- Poner el movil en horizontal que ocupe bien la pantalla.
+- Al actualizar pagina pausar cancion.
+- Incrementar velocidad con respecto a la duracion del juego (mas tiempo jugando mas rapido van las ratas y el fondo)

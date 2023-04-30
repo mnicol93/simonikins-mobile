@@ -38,9 +38,11 @@ document.getElementById('button').onclick = () => {
 };
 function resetCanvas(goDiv){
     document.getElementById('game-over-btn').onclick = () =>{
+        console.log("Pulsado-boton");
         resetHandler(goDiv);
     }
     document.getElementById('game-over-btn').touchstart = () =>{
+        console.log("Pulsado-touch");
         resetHandler(goDiv);
     }
 }
