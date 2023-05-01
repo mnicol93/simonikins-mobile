@@ -2,11 +2,16 @@ var animation;
 var death = false;
 var enemySpeed = 1.25;
 // Handles main animation
-function animate(){
+async function animate(){
     // This function will repeat in loop thanks to this line
     animation = window.requestAnimationFrame(animate);
     // Must check right after request animation so it can cancel if gameover
-    if(death) gameOver();
+    if(death) {
+        console.log(player.image.src);
+        deathSound.play();
+        await player.update();
+        gameOver();
+    }
     // Clear canvas prior to drawing new position
     c.fillStyle = 'black'
     c.fillRect(0,0, canvas.width, canvas.height);
@@ -16,7 +21,7 @@ function animate(){
 
     scrollCity();
     
-    // Draw the players on screen
+    // Draw the player on screen
     player.update();
     enemy.forEach(enem => {
         enem.update();
@@ -35,7 +40,6 @@ function animate(){
             ){
                 player.image.src = 'enfermo1.png';
                 death = true;
-                player.update();
             }
             //////////////////////////////////////////////////
         }
@@ -81,6 +85,8 @@ function enemySpawner(){
     }
 // Handles game over screen
 function gameOver(){
+    //player.update();
+    //deathSound.play();
     window.cancelAnimationFrame(animation);
     theme.pause();
     collisionFound = true;
@@ -88,9 +94,7 @@ function gameOver(){
     scrollSpeed = 0;
     enemy.forEach(e => {
         e.velocity.x = 0;
-        deathSound.play();
     }); 
-
     var containerDiv = document.getElementById('container');
     containerDiv.insertAdjacentHTML(
         'afterbegin',
@@ -151,4 +155,9 @@ function resetHandler(goDiv){
     theme.play();
     // Play again
     animate();
+}
+
+async function updateImage(player, sound){
+    player.image.src = 'enfermo1.png';
+    player.update();
 }

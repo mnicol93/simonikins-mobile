@@ -10,7 +10,7 @@ class Sprite{
     draw(){
         c.drawImage(this.image, this.position.x, this.position.y);
     }
-    update(){
+    async update(){
         this.draw();
     }
 }

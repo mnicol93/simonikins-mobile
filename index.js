@@ -5,6 +5,8 @@ const c = canvas.getContext('2d');
 const enemyHeight = 75;
 const theme = new Audio("tema.wav");
 const deathSound = new Audio("muerte.wav");
+const deathImage = new Image();
+deathImage.src = 'enfermo1.png';
 // Image holding the city
 var city = new Image();
 city.src = 'CIUDAD2.png';
