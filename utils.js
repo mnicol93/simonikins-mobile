@@ -83,12 +83,12 @@ function enemySpawner(){
 function gameOver(){
     window.cancelAnimationFrame(animation);
     theme.pause();
-    //deathSound.play();
     collisionFound = true;
     player.velocity.y = 0;
     scrollSpeed = 0;
     enemy.forEach(e => {
         e.velocity.x = 0;
+        deathSound.play();
     }); 
 
     var containerDiv = document.getElementById('container');
