@@ -7,9 +7,6 @@ async function animate(){
     animation = window.requestAnimationFrame(animate);
     // Must check right after request animation so it can cancel if gameover
     if(death) {
-        console.log(player.image.src);
-        deathSound.play();
-        await player.update();
         gameOver();
     }
     // Clear canvas prior to drawing new position
@@ -85,9 +82,9 @@ function enemySpawner(){
     }
 // Handles game over screen
 function gameOver(){
-    //player.update();
-    //deathSound.play();
-    window.cancelAnimationFrame(animation);
+    deathSound.play(); 
+    player.update();
+
     theme.pause();
     collisionFound = true;
     player.velocity.y = 0;
@@ -117,7 +114,8 @@ function gameOver(){
     gameOverBtn.style.height = (img.height/1.2)+ 'px';
     gameOverBtn.style.left = (canvas.width / 2.38) + 'px';
     gameOverBtn.style.position = 'absolute';
-    //deathSound.play();    
+    //deathSound.play();  
+    window.cancelAnimationFrame(animation);
     resetCanvas(goDiv);
 }
 // Infinite background scrolling
