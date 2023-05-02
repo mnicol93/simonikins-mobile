@@ -30,11 +30,7 @@ window.addEventListener('touchend', (event) => {
 })
 // Delete initial screen button
 document.getElementById('button').onclick = () => {
-    // theme.loop = true;
-    // theme.play();
-    // animate(); 
-    // button.remove();
-    // isReady = true;
+
     theme.loop = true;
     deathSound.play();
     deathSound.pause();
