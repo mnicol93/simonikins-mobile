@@ -83,7 +83,7 @@ function enemySpawner(){
 // Handles game over screen
 function gameOver(){
     deathSound.play(); 
-    player.update();
+    player.image = player.sprites.dead.image;
 
     theme.pause();
     collisionFound = true;
@@ -137,7 +137,8 @@ function resetHandler(goDiv){
     // Remove div holding game over
     goDiv.remove();
     // Return player to initial state
-    player.image.src = 'rapero1.png';
+    //player.image.src = 'rapero1.png';
+    player.image = player.sprites.iddle.image;
     death = false;
     // Clear enemies out of the screen to avoid unwanted collisions
     enemy.forEach(enem => {

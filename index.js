@@ -45,7 +45,15 @@ const player = new Player({
     },
     height: 160,
     width: 50,
-    imageSrc: 'rapero1.png'
+    imageSrc: 'rapero1.png',
+    sprites: {
+        iddle: {
+            imageSrc: 'rapero1.png'
+        },
+        dead: {
+            imageSrc: 'enfermo1.png'
+        }
+    }
 });
 // TODO: position.x = canvas.width,
 const enemy = [new Player({
