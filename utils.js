@@ -35,7 +35,6 @@ async function animate(){
                 (player.position.y + player.height >= enem.position.y && 
                  (player.position.y + player.height) <= (enem.position.y + enem.height))
             ){
-                player.image.src = 'enfermo1.png';
                 death = true;
             }
             //////////////////////////////////////////////////
