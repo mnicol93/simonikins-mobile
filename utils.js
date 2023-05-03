@@ -22,6 +22,7 @@ async function animate(){
     player.update();
     enemy.forEach(enem => {
         enem.update();
+        enem.velocity.x = enemySpeed;
         //Detect collision
         if(enem.position.x < 200 && enem.position.x > 125){
             // TODO: Utils OOP
@@ -74,8 +75,9 @@ function enemySpawner(){
                 width: 50,
                 imageSrc: 'rata12.png'
             });
-        if (spawn > 500) spawn -= 100;
-        //if(enemySpeed < 2) enemySpeed += 0.1;
+        if (spawn > 250) spawn -= 250;
+        enemySpeed += 0.1;
+        // if(enemySpeed < 2) enemySpeed += 0.1;
     }}, spawn);
     
     }

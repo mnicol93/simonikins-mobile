@@ -56,19 +56,19 @@ const player = new Player({
     }
 });
 // TODO: position.x = canvas.width,
-const enemy = [new Player({
-    position: {
-        x: 350,
-        y: 40
-    }, 
-    velocity: {
-        x: 1.1,
-        y: 0
-    },
-    height: enemyHeight,
-    width: 30,
-    imageSrc: 'rata12.png'
-})];
+const enemy = []; //= [new Player({
+//     position: {
+//         x: canvas.width,
+//         y: 40
+//     }, 
+//     velocity: {
+//         x: 1.1,
+//         y: 0
+//     },
+//     height: enemyHeight,
+//     width: 30,
+//     imageSrc: 'rata12.png'
+// })];
 // End Classes Declaration
 
 // Object holding all the keys used by the player to manipulate in @animate() function
