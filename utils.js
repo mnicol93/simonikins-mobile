@@ -57,7 +57,7 @@ async function animate(){
 }
 // Will spawn enemies as specified by variable spawn
 function enemySpawner(){
-    setInterval(()=>{
+    
         var enemyY = (Math.random() * canvas.height) - enemyHeight;
         if(enemyY < 0) enemyY = 0;
         // TODO: Change position.x value by variable to adapt for mobile
@@ -75,17 +75,19 @@ function enemySpawner(){
                 width: 50,
                 imageSrc: 'rata12.png'
             });
-        if (spawn > 250) spawn -= 250;
-        enemySpeed += 0.1;
+        if (spawn > 250) spawn -= 25;
+        enemySpeed += 0.05;
         // if(enemySpeed < 2) enemySpeed += 0.1;
-    }}, spawn);
+    }
+    setTimeout(enemySpawner, spawn);
     
     }
 // Handles game over screen
 function gameOver(){
     deathSound.play(); 
     player.image = player.sprites.dead.image;
-
+    spawn = 2500;
+    enemySpeed = 1.25;
     theme.pause();
     collisionFound = true;
     player.velocity.y = 0;

@@ -89,4 +89,4 @@ const keys = {
 //   });
 
 // TODO: Change by touch for mobile
-enemySpawner();
+setTimeout(enemySpawner, 100);
