@@ -75,8 +75,8 @@ function enemySpawner(){
                 width: 50,
                 imageSrc: 'rata12.png'
             });
-        if (spawn > 250) spawn -= 25;
-        enemySpeed += 0.075;
+        if (spawn > 250) spawn -= 35;
+        enemySpeed += 0.05;
         // if(enemySpeed < 2) enemySpeed += 0.1;
     }
     setTimeout(enemySpawner, spawn);
