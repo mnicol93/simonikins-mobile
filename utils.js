@@ -106,7 +106,7 @@ function gameOver(){
     var img = new Image(canvas.width/1.95, canvas.height/1.10);
     img.src = 'Portada.jpg';
     img.style.position = 'absolute';
-    img.style.left = (canvas.width/3.2) + 'px';
+    img.style.left = (canvas.width/3.8) + 'px';
     img.style.zIndex = 1;
     goDiv.style.height = canvas.height + 'px';
     goDiv.style.width = canvas.width + 'px';
@@ -115,7 +115,7 @@ function gameOver(){
     gameOverBtn.style.zIndex = 2;
     gameOverBtn.style.width = (img.width/1.60) + 'px';
     gameOverBtn.style.height = (img.height/1.2)+ 'px';
-    gameOverBtn.style.left = (canvas.width / 2.38) + 'px';
+    gameOverBtn.style.left = (canvas.width / 2.68) + 'px';
     gameOverBtn.style.position = 'absolute';
     //deathSound.play();  
     window.cancelAnimationFrame(animation);

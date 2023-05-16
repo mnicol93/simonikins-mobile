@@ -21,7 +21,7 @@ a:link {
 
   }
   
-  a:visited {
+a:visited {
     color: pink;
     background-color: transparent;
   }
